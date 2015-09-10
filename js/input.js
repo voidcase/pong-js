@@ -21,12 +21,12 @@ $(document).ready(function() {
         if (keycode == 37) {
             console.log("Left arrow key pressed")
         } else if (keycode == 38) {
-            playerVel = -5;
+            playerVel = -racketSpeed;
             console.log("Up arrow key pressed")
         } else if (keycode == 39) {
             console.log("Right arrow key pressed")
         } else if (keycode == 40) {
-            playerVel = 5;
+            playerVel = racketSpeed;
             console.log("Down arrow key pressed")
         } else if(keycode == 122 || keycode == 123) {
             // We want to be able to open tools developer and fullscreen mode

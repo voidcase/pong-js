@@ -1,13 +1,15 @@
-ballXVel = -5;
-ballYVel = 0;
-ballX = window.innerWidth/2;
-ballY = window.innerHeight/2;
 playerY = window.innerHeight/2;
 playerVel = 0;
 playerWidth = 10;
 playerHeight = 40;
-racketSpeed = 4;
+racketSpeed = 2;
 racketXOffset = 30;
+ballSpeed = 3;
+ballSide = 10;
+ballXVel = -ballSpeed;
+ballYVel = 0;
+ballX = window.innerWidth/2;
+ballY = window.innerHeight/2;
 
 // Welcome to the fullscreen.js file!
 // Here you will discover a few new features, such as fullscreen canvas and a render-loop.
@@ -26,10 +28,33 @@ $(document).ready(function() {
 
         //Player logic and drawing
         playerY += playerVel;
+        // Player collide with top/bottom
+        if(playerY <= 0 || playerY >= window.innerHeight - playerHeight) {
+            playerVel = -playerVel;
+        }
         drawRectangle(racketXOffset, playerY, playerWidth, playerHeight );
 
         //Ball logic and drawing
-        //if (racket)
+        ballX += ballXVel;
+        ballY += ballYVel;
+        // Ball collide with top/bottom
+        if(ballY <= 0 || ballY >= window.innerHeight - ballSide) {
+            ballYVel = -ballYVel;
+        }
+        if (ballX <= racketXOffset + playerWidth) { //if ball hit left side
+            if (ballY >= playerY && ballY <= playerY + playerHeight) { // if ball
+                ballXVel = ballSpeed;
+                ballYVel += playerVel;
+            } else {
+                //Lose
+                //reset everything function
+                console.log("Lose!")
+            }
+        } else if (ballX >= window.innerWidth - (racketXOffset + playerWidth))
+        {
+
+        }
+        drawRectangle(ballX, ballY, ballSide, ballSide);
 
         //Enemy logic and drawing
 
