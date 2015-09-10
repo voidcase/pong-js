@@ -1,3 +1,5 @@
+pressedKeys = [];
+
 $(document).ready(function() {
     // This is the function that will be ran when you click on the canvas.
     // Try to make it draw a box or circle at the location you click.
@@ -50,6 +52,18 @@ $(document).ready(function() {
     // Add event listener for `click` events.
     canvasElement.addEventListener('click', onMouseClick, false);
     canvasElement.addEventListener('contextmenu', onMouseClick, false);
+    window.addEventListener("keydown",
+        function(event){
+            pressedKeys[event.keyCode] = true;
+            console.log("keydown ###########");
+        },
+    false);
+    window.addEventListener("keyup",
+        function(event){
+            pressedKeys[event.keyCode] = true;
+            console.log("keyup ###########");
+        },
+    false);
 
     // This prevents the right-click menu (the "contextmenu") from opening when rightclicking on the canvas.
     canvasElement.oncontextmenu = function() { return false; }
