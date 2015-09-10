@@ -42,7 +42,8 @@ $(document).ready(function() {
 
         //Player logic and drawing
         playerY += playerVel;
-		enemyY += enemyVel();
+        enemyVel = updateEnemyVel();
+		enemyY += enemyVel;
         // Player collide with top/bottom
         if(playerY <= 0 || playerY >= window.innerHeight - playerHeight) {
             playerVel = -playerVel;
@@ -59,7 +60,7 @@ $(document).ready(function() {
         }
         if (ballX <= racketXOffset + playerWidth) { //if ball hit left side
             if (ballY >= playerY && ballY <= playerY + playerHeight) { // if ball
-                ballXVel = ballSpeed;
+                ballXVel = -ballXVel;
                 ballYVel += playerVel;
             } else {
                 score--;
@@ -68,7 +69,14 @@ $(document).ready(function() {
             }
         } else if (ballX >= window.innerWidth - (racketXOffset + playerWidth))
         {
-
+            if (ballY >= enemyY && ballY <= enemyY + playerHeight) { // if ball
+                ballXVel = -ballXVel;
+                ballYVel += enemyVel;
+            } else {
+                score++;
+                resetPositions();
+                console.log("Win!")
+            }
         }
         drawRectangle(ballX, ballY, ballSide, ballSide);
 
@@ -79,7 +87,8 @@ $(document).ready(function() {
         // Tells the browser that the frame has been drawn and that we're ready to draw the next one.
         window.requestAnimationFrame(renderFrame);
     };
-	function enemyVel(){
+
+	function updateEnemyVel(){
 		if (ballY<enemyY) return -2;
 		else if (ballY>enemyY) return 2;
 		else return 0;
