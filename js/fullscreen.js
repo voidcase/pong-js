@@ -1,3 +1,14 @@
+ballXVel = -5;
+ballYVel = 0;
+ballX = window.innerWidth/2;
+ballY = window.innerHeight/2;
+playerY = window.innerHeight/2;
+playerVel = 0;
+playerWidth = 10;
+playerHeight = 40;
+racketSpeed = 4;
+racketXOffset = 30;
+
 // Welcome to the fullscreen.js file!
 // Here you will discover a few new features, such as fullscreen canvas and a render-loop.
 // This file is used by the fullscreen.html file, and will not be loaded in the index.html file.
@@ -13,13 +24,14 @@ $(document).ready(function() {
         // draw upon each other, creating a beautiful (or not) mess.
         clear();
 
-        for(var j=0; j<10; j++) {
-            offset = 10*((j + i) % steps)
-            drawRectangle(canvas.width/2 - 200 + offset, canvas.height/2 - 200 + offset, 200, 200);
-        }
-        i = (i + 0.1) % 20;
+        //Player logic and drawing
+        playerY += playerVel;
+        drawRectangle(racketXOffset, playerY, playerWidth, playerHeight );
 
-        drawFPSCounter(timestamp);
+        //Ball logic and drawing
+        //if (racket)
+
+        //Enemy logic and drawing
 
         // Tells the browser that the frame has been drawn and that we're ready to draw the next one.
         window.requestAnimationFrame(renderFrame);
