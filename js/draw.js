@@ -136,7 +136,7 @@ function animateSpinningArcs() {
 
         // Here the previous line width is restored.
         canvas.lineWidth = prevLineWidth;
-        
+
         if(runningAnimation) {
             window.requestAnimationFrame(drawFrame);
         }
@@ -160,4 +160,9 @@ function drawFPSCounter(timestamp) {
 
     // Store the timestamp from this frame to use when calculating the next frame.
     lastTimestamp = timestamp;
+}
+
+function drawText(text, x, y) {
+    canvas.font = "20px Arial";
+    canvas.fillText(text, x, y);
 }
