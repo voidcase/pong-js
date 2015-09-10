@@ -2,6 +2,10 @@ playerY = window.innerHeight/2;
 playerVel = 0;
 playerWidth = 10;
 playerHeight = 40;
+
+enemyY = window.innerHeight/2;
+enemyXOffset = window.innerWidth-30;
+
 racketSpeed = 2;
 racketXOffset = 30;
 ballSpeed = 3;
@@ -38,11 +42,13 @@ $(document).ready(function() {
 
         //Player logic and drawing
         playerY += playerVel;
+		enemyY += enemyVel();
         // Player collide with top/bottom
         if(playerY <= 0 || playerY >= window.innerHeight - playerHeight) {
             playerVel = -playerVel;
         }
         drawRectangle(racketXOffset, playerY, playerWidth, playerHeight );
+        drawRectangle(enemyXOffset, enemyY, playerWidth, playerHeight );
 
         //Ball logic and drawing
         ballX += ballXVel;
@@ -73,6 +79,11 @@ $(document).ready(function() {
         // Tells the browser that the frame has been drawn and that we're ready to draw the next one.
         window.requestAnimationFrame(renderFrame);
     };
+	function enemyVel(){
+		if (ballY<enemyY) return -2;
+		else if (ballY>enemyY) return 2;
+		else return 0;
+	}
 
     // This makes sure that the canvas keeps the size of the window if the window size changes.
     $(window).resize(function() {
