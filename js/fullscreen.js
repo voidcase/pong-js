@@ -32,6 +32,7 @@ $(document).ready(function() {
 
         //Player logic and drawing
         playerY += playerVel;
+		enemyY += enemyVel();
         // Player collide with top/bottom
         if(playerY <= 0 || playerY >= window.innerHeight - playerHeight) {
             playerVel = -playerVel;
@@ -66,6 +67,11 @@ $(document).ready(function() {
         // Tells the browser that the frame has been drawn and that we're ready to draw the next one.
         window.requestAnimationFrame(renderFrame);
     };
+	function enemyVel(){
+		if (ballY<enemyY) return -2;
+		else if (ballY>enemyY) return 2;
+		else return 0;
+	}
 
     // This makes sure that the canvas keeps the size of the window if the window size changes.
     $(window).resize(function() {
