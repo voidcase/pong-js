@@ -2,6 +2,10 @@ playerY = window.innerHeight/2;
 playerVel = 0;
 playerWidth = 10;
 playerHeight = 40;
+
+enemyY = window.innerHeight/2;
+enemyXOffset = window.innerWidth-30;
+
 racketSpeed = 2;
 racketXOffset = 30;
 ballSpeed = 3;
@@ -33,6 +37,7 @@ $(document).ready(function() {
             playerVel = -playerVel;
         }
         drawRectangle(racketXOffset, playerY, playerWidth, playerHeight );
+        drawRectangle(enemyXOffset, enemyY, playerWidth, playerHeight );
 
         //Ball logic and drawing
         ballX += ballXVel;
