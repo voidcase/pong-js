@@ -14,6 +14,16 @@ ballXVel = -ballSpeed;
 ballYVel = 0;
 ballX = window.innerWidth/2;
 ballY = window.innerHeight/2;
+score = 0;
+
+function resetPositions() {
+    playerY = window.innerHeight/2;
+    playerVel = 0;
+    ballXVel = -ballXVel;
+    ballYVel = 0;
+    ballX = window.innerWidth/2;
+    ballY = window.innerHeight/2;
+}
 
 // Welcome to the fullscreen.js file!
 // Here you will discover a few new features, such as fullscreen canvas and a render-loop.
@@ -52,8 +62,8 @@ $(document).ready(function() {
                 ballXVel = ballSpeed;
                 ballYVel += playerVel;
             } else {
-                //Lose
-                //reset everything function
+                score--;
+                resetPositions();
                 console.log("Lose!")
             }
         } else if (ballX >= window.innerWidth - (racketXOffset + playerWidth))
@@ -63,6 +73,8 @@ $(document).ready(function() {
         drawRectangle(ballX, ballY, ballSide, ballSide);
 
         //Enemy logic and drawing
+
+        drawText("Score: " + score, window.innerWidth/2, 30);
 
         // Tells the browser that the frame has been drawn and that we're ready to draw the next one.
         window.requestAnimationFrame(renderFrame);
@@ -89,3 +101,5 @@ $(document).ready(function() {
 
     onLoad();
 });
+
+
